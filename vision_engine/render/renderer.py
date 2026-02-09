@@ -7,6 +7,7 @@ from typing import Any, Dict, List, Optional, Callable
 from .shader_manager import ShaderManager
 from .vulkan_backend import VulkanBackend
 from .webgpu_backend import WebGPUBackend
+from .display_backend import DisplayBackend
 
 
 class Renderer:
@@ -22,7 +23,7 @@ class Renderer:
         Initialize the renderer.
         
         Args:
-            backend: Rendering backend ('vulkan', 'metal', 'dx12', 'webgpu', 'auto')
+            backend: Rendering backend ('vulkan', 'metal', 'dx12', 'webgpu', 'display', 'auto')
             interactive: Enable interactive features
         """
         self.backend_name = backend
@@ -34,9 +35,11 @@ class Renderer:
             self.backend = VulkanBackend()
         elif backend == "webgpu" or (backend == "auto" and self._supports_webgpu()):
             self.backend = WebGPUBackend()
+        elif backend == "display":
+            self.backend = DisplayBackend()
         else:
-            # Default to Vulkan if auto and no specific support detected
-            self.backend = VulkanBackend()
+            # Default to display backend if auto and no specific support detected
+            self.backend = DisplayBackend()
             
         self.is_initialized = False
         self.viewport_size = (800, 600)
