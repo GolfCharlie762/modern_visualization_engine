@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "cython>=0.29.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vision-engine"
+version = "0.1.0"
+description = "Modern Python Visualization Framework with GPU acceleration"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Vision Engine Team", email = "info@visionengine.org"}
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+requires-python = ">=3.8"
+dependencies = [
+    "numpy>=1.21.0",
+    "cython>=0.29.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "pytest-cov",
+    "black",
+    "flake8",
+]
+docs = [
+    "sphinx",
+    "sphinx-rtd-theme",
+]
+
+[project.scripts]
+vision-engine = "vision_engine.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["vision_engine*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.pytest.ini_options]
+testpaths = ["vision_engine/tests"]
+addopts = "-v --cov=vision_engine"
