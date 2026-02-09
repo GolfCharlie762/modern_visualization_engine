@@ -184,15 +184,23 @@ class Renderer:
             )
             
             # Process the node's data for rendering
+            processed_node_data = self._process_node_data(node_data["data"])
+            
+            # Extract primitive_type and count from the processed node data
+            primitive_type = processed_node_data.get("primitive_type", "triangles")
+            count = processed_node_data.get("count", 0)
+
             processed_node = {
                 "id": node_id,
                 "type": node_data["type"],
                 "geometry_type": geometry_type,
-                "data": self._process_node_data(node_data["data"]),
+                "data": processed_node_data,
                 "material_properties": material_props,
                 "transform": np.array(node_data["transform"]),
                 "visible": node_data["visible"],
-                "shader": shader_program
+                "shader": shader_program,
+                "primitive_type": primitive_type,
+                "count": count
             }
             
             processed_nodes[node_id] = processed_node
@@ -229,15 +237,23 @@ class Renderer:
             )
             
             # Process the node's data for rendering
+            processed_node_data = self._process_node_data(node_data["data"])
+            
+            # Extract primitive_type and count from the processed node data
+            primitive_type = processed_node_data.get("primitive_type", "triangles")
+            count = processed_node_data.get("count", 0)
+
             processed_node = {
                 "id": node_id,
                 "type": node_type,
                 "geometry_type": geometry_type,
-                "data": self._process_node_data(node_data["data"]),
+                "data": processed_node_data,
                 "material_properties": material_props,
                 "transform": np.array(node_data["transform"]),
                 "visible": node_data["visible"],
-                "shader": shader_program
+                "shader": shader_program,
+                "primitive_type": primitive_type,
+                "count": count
             }
             
             processed_nodes[node_id] = processed_node
