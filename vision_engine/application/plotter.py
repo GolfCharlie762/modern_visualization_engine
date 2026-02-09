@@ -22,7 +22,7 @@ class Plotter:
         Initialize the Plotter.
         
         Args:
-            backend: Rendering backend ('vulkan', 'metal', 'dx12', 'webgpu', 'auto')
+            backend: Rendering backend ('vulkan', 'metal', 'dx12', 'webgpu', 'display', 'auto')
         """
         self.backend = backend
         self.scene_manager = SceneManager()
